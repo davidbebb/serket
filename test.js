@@ -59,8 +59,8 @@ $.getJSON(connectedLink2, function showData(data){
   var sortedNames = sortedBoth.map(pair => pair[0]);
   var sortedScores = sortedBoth.map(pair => pair[1]);
 
-  console.log(sortedNames);
-  console.log(sortedScores);
+  // console.log(sortedNames);
+  // console.log(sortedScores);
 
   //
 
@@ -71,9 +71,10 @@ $.getJSON(connectedLink2, function showData(data){
 
   var justTheHours = justTheTimes.map(time => time.slice(0,2));
 
-  console.log(dispenseDateTimes);
-  console.log(justTheDates);
-  console.log(justTheTimes);
-  console.log(unique(justTheHours));
+  //console.log(dispenseDateTimes);
+  //console.log(justTheDates);
+  console.log(((dispenseDateTimes[20])).getDay());
+  // console.log(justTheTimes);
+  // console.log(unique(justTheHours));
 
 });
