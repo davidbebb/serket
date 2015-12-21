@@ -7,7 +7,6 @@ function drawMedsPieChart(data_to_display) {
   var data = new google.visualization.DataTable();
   data.addColumn('date', 'Day');
   data.addColumn('number', 'Number');
-
   data.addRows(data_to_display);
 
   // Set chart options
@@ -18,49 +17,10 @@ function drawMedsPieChart(data_to_display) {
                 };
 
   // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.AnnotationChart(document.getElementById('chart1_div'));
+  var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
   chart.draw(data, options);
 }
 
-function drawMedsPieChart1(data_to_display) {
-
-  // Create the data table.
-  var data = new google.visualization.DataTable();
-  data.addColumn('date', 'Day');
-  data.addColumn('number', 'Number');
-  data.addRows(data_to_display);
-
-  // Set chart options
-  var options = {'title':'Medicine by number of prescriptions, all time',
-                 'width':700,
-                 'height':400,
-                 'legend':'none'
-                };
-
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.AnnotationChart(document.getElementById('chart2_div'));
-  chart.draw(data, options);
-}
-function drawMedsPieChart2(data_to_display) {
-
-  // Create the data table.
-  var data = new google.visualization.DataTable();
-  data.addColumn('date', 'Day');
-  data.addColumn('number', 'Number');
-
-  data.addRows(data_to_display);
-
-  // Set chart options
-  var options = {'title':'Medicine by number of prescriptions, all time',
-                 'width':700,
-                 'height':400,
-                 'legend':'none'
-                };
-
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.AnnotationChart(document.getElementById('chart2_div'));
-  chart.draw(data, options);
-}
 
 
 
@@ -70,10 +30,7 @@ $.getJSON(connectedLink2, function showData(data){
 
   data = filterByDate(data);
 
-  data = data.filter(datum => datum.dispenseDate.getMonth()===9);
-
-  dataTrue = data.filter(datum => datum.statePattern);
-  dataFalse = data.filter(datum => !datum.statePattern);
+  data = data.filter(datum => datum.dispenseDate.getMonth()===10)
   // throw out everything with an illegitimate medicine name
   var dataHappyName = data.filter(datum => happyMedName(datum.medicineName));
   // extract the medicine names that make sense
@@ -84,13 +41,11 @@ $.getJSON(connectedLink2, function showData(data){
   // zip up the two arrays, sort them, unzips again
   var happyNameBoth = happyNameList.map((name, index) => [name, happyNameScore[index]]);
 
-  allDispence = dispenceVsDay(data);
-  trueDispence = dispenceVsDay(dataTrue);
-  falseDispence = dispenceVsDay(dataFalse);
-  dataToDispay = [allDispence, trueDispence, falseDispence];
+  var dispenseDates = unique(data.map(datum => datum.dispenseDate))
 
-  drawMedsPieChart(allDispence);
-  drawMedsPieChart1(allDispence);
-  drawMedsPieChart2(allDispence);
+  var dateScore = dispenseDates.map(name => howManyTimesDate(name.getDate(), data))
 
+  var salesTime = dispenseDates.map((datum, index) => [datum, dateScore[index]]);
+  console.log(salesTime)
+  drawMedsPieChart(salesTime)
 });
