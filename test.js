@@ -62,19 +62,10 @@ $.getJSON(connectedLink2, function showData(data){
   // console.log(sortedNames);
   // console.log(sortedScores);
 
-  //
 
-  var dispenseDateTimes = dataHappyName.map(datum => datum.dispenseDate).sort();
+  var dispenseDateTimes = dataHappyName.map(datum => new Date(datum.dispenseDate));
 
-  var justTheDates = dispenseDateTimes.map(dateTime => dateTime.split('T')[0]);
-  var justTheTimes = dispenseDateTimes.map(dateTime => dateTime.split('T')[1]).sort();
+  console.log(dispenseDateTimes.map(day => day.getMonth()));
 
-  var justTheHours = justTheTimes.map(time => time.slice(0,2));
-
-  //console.log(dispenseDateTimes);
-  //console.log(justTheDates);
-  console.log(((dispenseDateTimes[20])).getDay());
-  // console.log(justTheTimes);
-  // console.log(unique(justTheHours));
 
 });
