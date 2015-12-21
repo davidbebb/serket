@@ -20,6 +20,10 @@ function howManyTimes(medName, data) {
   return data.reduce(((acc, datum) => acc + (getMedName(datum.medicineName) == medName ? 1 : 0)), 0);
 }
 
+function howManyTimesDate(value, data) {
+  return data.reduce(((acc, datum) => acc + (datum.dispenseDate.getDate() == value ? 1 : 0)), 0);
+}
+
 function getMedName(fullName) {
   if (fullName === "") return "";
   return fullName.toLowerCase().split(" ")[0]
@@ -31,5 +35,10 @@ function filterByDate(data) {
     obj.dispenseDate = new Date(obj.dispenseDate);
     return obj;
   });
+};
 
+dispenceVsDay = function(data){
+  var dispenseDates = unique(data.map(datum => datum.dispenseDate.getDate()));
+  var dateScore = dispenseDates.map(name => howManyTimesDate(name, data));
+  return salesTime = dispenseDates.map((datum, index) => [datum, dateScore[index]]);
 };
