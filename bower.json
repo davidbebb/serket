@@ -1,0 +1,22 @@
+{
+  "name": "serket",
+  "homepage": "https://github.com/davidbebb/serket",
+  "authors": [
+    "David Bebb <davidbebb@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment-range": "~2.1.0",
+    "moment": "~2.10.6"
+  }
+}
